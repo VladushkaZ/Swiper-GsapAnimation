@@ -1,5 +1,6 @@
 export const data = [
   {
+    id: 0,
     year_start: 1980,
     year_end: 1986,
     title: "Технологии",
@@ -35,8 +36,8 @@ export const data = [
     ],
   },
   {
+    id: 1,
     year_start: 1987,
-    year_end: 1991,
     title: "Кино",
     children: [
       {
@@ -62,6 +63,7 @@ export const data = [
     ],
   },
   {
+    id: 2,
     year_start: 1992,
     year_end: 1997,
     title: "Литература",
@@ -93,6 +95,7 @@ export const data = [
     ],
   },
   {
+    id: 3,
     year_start: 1998,
     year_end: 2004,
     title: "Театр",

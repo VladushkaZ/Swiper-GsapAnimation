@@ -32,7 +32,7 @@ function App() {
     let radius = circle?.current ? circle?.current?.offsetWidth / 2 : 0;
     for (i = 0; i < data.length; i++) {
       point = document.createElement("span");
-      point.title = data[i].title;
+      point.title = data[i]?.title || "";
       point.textContent = (i + 1).toString();
       point.className = "circle_point";
       point.id = (i + 1).toString();
@@ -67,21 +67,21 @@ function App() {
         : circlePoint?.classList.remove("hovered");
     });
     gsap.to(startDate.current, {
-      innerText: data[periodId].year_start,
+      innerText: data[periodId]?.year_start ? data[periodId]?.year_start : "",
       duration: 1,
       snap: {
         innerText: 1,
       },
     });
     gsap.to(endDate.current, {
-      innerText: data[periodId].year_end,
+      innerText: data[periodId]?.year_end ? data[periodId]?.year_end : "",
       duration: 1,
       snap: {
         innerText: 1,
       },
     });
     gsap.to(periodTitle.current, {
-      innerText: data[periodId].title,
+      innerText: data[periodId]?.title ? data[periodId]?.title : "",
       opacity: "100%",
       duration: 3,
     });
@@ -117,18 +117,24 @@ function App() {
         <div className="header">
           <div className="page_title">Исторические даты</div>
           <div className="years">
-            <div className="blue" ref={startDate}>
-              {data[0].year_start}
-            </div>
-            <div className="pink" ref={endDate}>
-              {data[0].year_end}
-            </div>
+            {data[0]?.year_start && (
+              <div className="blue" ref={startDate}>
+                {data[0]?.year_start}
+              </div>
+            )}
+            {data[0]?.year_end && (
+              <div className="pink" ref={endDate}>
+                {data[0]?.year_end}
+              </div>
+            )}
           </div>
           <div className="viewport-box">
             <div ref={circle} className="main-circle"></div>
-            <span className="period_title" ref={periodTitle}>
-              {data[0].title}
-            </span>
+            {data[0]?.title && (
+              <span className="period_title" ref={periodTitle}>
+                {data[0]?.title}
+              </span>
+            )}
             <div className="cross"></div>
           </div>
         </div>
@@ -161,7 +167,7 @@ function App() {
               {data.map((item, id) => {
                 return (
                   <span
-                    key={id}
+                    key={item?.id}
                     onClick={() => setPeriodId(id)}
                     className={
                       id === periodId ? "slide_point active" : "slide_point"
