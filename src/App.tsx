@@ -24,13 +24,13 @@ function App() {
   let circlePoints = document.querySelectorAll(".circle_point");
 
   useEffect(() => {
-    let angleIncrement = (Math.PI * 2) / data.length;
+    let angleIncrement = (Math.PI * 2) / data?.length;
     let points = [];
     let point;
     let angle;
     let i: number;
     let radius = circle?.current ? circle?.current?.offsetWidth / 2 : 0;
-    for (i = 0; i < data.length; i++) {
+    for (i = 0; i < data?.length; i++) {
       point = document.createElement("span");
       point.title = data[i]?.title || "";
       point.textContent = (i + 1).toString();
@@ -49,8 +49,8 @@ function App() {
       if (i === 0) point.classList.add("hovered");
     }
 
-    points.forEach((circlePoint, index) => {
-      circlePoint.addEventListener("click", function () {
+    points?.forEach((circlePoint, index) => {
+      circlePoint?.addEventListener("click", function () {
         document
           .querySelector(".circle_point.hovered")
           ?.classList.remove("hovered");
@@ -61,27 +61,27 @@ function App() {
   }, []);
 
   useEffect(() => {
-    circlePoints.forEach((circlePoint, index) => {
-      +circlePoint.id === periodId + 1
-        ? circlePoint.classList.add("hovered")
+    circlePoints?.forEach((circlePoint, index) => {
+      +circlePoint?.id === periodId + 1
+        ? circlePoint?.classList.add("hovered")
         : circlePoint?.classList.remove("hovered");
     });
-    gsap.to(startDate.current, {
-      innerText: data[periodId]?.year_start ? data[periodId]?.year_start : "",
+    gsap.to(startDate?.current, {
+      innerText: data[periodId]?.year_start ? data[periodId]?.year_start : null,
       duration: 1,
       snap: {
         innerText: 1,
       },
     });
-    gsap.to(endDate.current, {
-      innerText: data[periodId]?.year_end ? data[periodId]?.year_end : "",
+    gsap.to(endDate?.current, {
+      innerText: data[periodId]?.year_end ? data[periodId]?.year_end : null,
       duration: 1,
       snap: {
         innerText: 1,
       },
     });
-    gsap.to(periodTitle.current, {
-      innerText: data[periodId]?.title ? data[periodId]?.title : "",
+    gsap.to(periodTitle?.current, {
+      innerText: data[periodId]?.title ? data[periodId]?.title : " ",
       opacity: "100%",
       duration: 3,
     });
@@ -90,7 +90,7 @@ function App() {
       opacity: "100%",
     });
 
-    let circlePoint = document.getElementById(`${(periodId + 1).toString()}`);
+    let circlePoint = document.getElementById(`${(periodId + 1)?.toString()}`);
     let clickX = gsap.getProperty(circlePoint, "x");
     let clickY = gsap.getProperty(circlePoint, "y");
     let radius = circle?.current ? circle?.current?.offsetWidth / 2 : 0;
@@ -103,7 +103,7 @@ function App() {
       rotation: angle - 45,
       duration: 3,
     });
-    circlePoints.forEach((circlePoint, index) => {
+    circlePoints?.forEach((circlePoint, index) => {
       gsap.to(circlePoint, {
         rotation: -(angle - 45),
         duration: 0,
@@ -118,14 +118,10 @@ function App() {
           <div className="page_title">Исторические даты</div>
           <div className="years">
             {data[0]?.year_start && (
-              <div className="blue" ref={startDate}>
-                {data[0]?.year_start}
-              </div>
+              <div className="blue" ref={startDate}></div>
             )}
             {data[0]?.year_end && (
-              <div className="pink" ref={endDate}>
-                {data[0]?.year_end}
-              </div>
+              <div className="pink" ref={endDate}></div>
             )}
           </div>
           <div className="viewport-box">
@@ -142,7 +138,7 @@ function App() {
           <div className="flex">
             <div>
               <div className="main_pagination">
-                0{periodId + 1}/0{data.length}
+                0{periodId + 1}/0{data?.length}
               </div>
               <div className="main_navigation">
                 {periodId > 0 ? (
@@ -153,7 +149,7 @@ function App() {
                 ) : (
                   <div className="main-button-prev disable"></div>
                 )}
-                {periodId < data.length - 1 ? (
+                {periodId < data?.length - 1 ? (
                   <div
                     className="main-button-next"
                     onClick={() => setPeriodId((prev: number) => prev + 1)}
@@ -164,7 +160,7 @@ function App() {
               </div>
             </div>
             <div className="flex">
-              {data.map((item, id) => {
+              {data?.map((item, id) => {
                 return (
                   <span
                     key={item?.id}
@@ -189,11 +185,11 @@ function App() {
             virtual
             className="child_swiper"
           >
-            {period.children.map((event: Event) => (
-              <SwiperSlide>
+            {period?.children?.map((event: Event, id) => (
+              <SwiperSlide key={event?.year + id}>
                 <div className="event">
-                  <div className="event_year">{event.year}</div>
-                  <div className="event_info">{event.info}</div>
+                  <div className="event_year">{event?.year}</div>
+                  <div className="event_info">{event?.info}</div>
                 </div>
               </SwiperSlide>
             ))}

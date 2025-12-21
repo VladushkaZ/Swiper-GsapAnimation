@@ -38,6 +38,7 @@ export const data = [
   {
     id: 1,
     year_start: 1987,
+    year_end: 1991,
     title: "Кино",
     children: [
       {
